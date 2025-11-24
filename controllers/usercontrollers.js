@@ -32,9 +32,14 @@ router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   const newuser = await User.findOne({ email }).exec();
 
-  const ismatching = await bcrypt.compare(password, newuser?.password||"");
+  if (!newuser) {
+    res.status(400).json({ message: "User not found, please register" });
+    return;
+  }
+
+  const ismatching = await bcrypt.compare(password, newuser.password);
   if (!ismatching) {
-    res.status(400).json({ message: "password incorrect / account does not have exist please register" });
+    res.status(400).json({ message: "Password incorrect" });
     return;
   }
 

@@ -34,8 +34,7 @@ router.delete("/removefavourites/:id", async (req, res) => {
   const token = req.headers.authorization.slice(7);
     try {
         const decoded = jwt.verify(token, "password");
-        await
-        Favourite.findOneAndDelete({
+        await Favourite.findOneAndDelete({
             userid:decoded.id,
             blogid:req.params.id
         })

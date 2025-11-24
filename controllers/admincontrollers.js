@@ -14,6 +14,7 @@ router.post("/adminlogin", async (req, res) => {
   if (Username === "admin123" && password === "password") {
     const token = jwt.sign({ admin: true }, "password"); //=secret
     res.json({ message: "Login Successful", token });
+    return;
   }
   res.status(403).json({ message: "Password invalid" });
 });
