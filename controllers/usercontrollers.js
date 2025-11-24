@@ -104,7 +104,7 @@ router.post("/changepassword", async (req, res) => {
         subject: "Hello from My blog online portal",
         html:`
         Please Click below to verify
-        <a href="http://localhost:4000/changepassword" style="padding:10px 20px;background-color:blue;color:white;">click here to verify</a>
+        <a href="http://localhost:3000/user/changepassword" style="padding:10px 20px;background-color:blue;color:white;">click here to verify</a>
         `
       });
       res.json("send")

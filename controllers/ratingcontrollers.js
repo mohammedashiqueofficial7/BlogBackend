@@ -1,14 +1,14 @@
 const express = require("express");
 const User = require("../Usermodel/user");
 const router = express.Router();
-const Rating = require("../usermodel/ratingmodel");
+const Rating = require("../Usermodel/ratingmodel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 router.get("/:id", async (req, res) => {
   const token = req.headers.authorization.slice(7);
   try {
-    const decoded = jwt.verify(token);
+    const decoded = jwt.verify(token, "password");
     const Ratestar = await Rating.findOne({
       userid: decoded.id,
       blogid: req.params.id,

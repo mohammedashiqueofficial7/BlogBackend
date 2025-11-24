@@ -19,6 +19,6 @@ app.use("/blogmodel", blogrouter);
 app.use("/admin", adminrouter);
 app.use("/rating",ratingrouter);
 app.use("/comment",commentrouter);
-app.use(contactrouter);
+app.use("/contact", contactrouter);
 app.use("/favourites",favouriterouter);
 app.listen(3000, () => {});

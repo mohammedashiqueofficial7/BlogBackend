@@ -4,7 +4,7 @@ const Blog = require("../Usermodel/blogmodel");
 const User = require("../Usermodel/user");
 var path = require("path");
 const jwt = require("jsonwebtoken");
-const ratings = require("../usermodel/ratingmodel");
+const ratings = require("../Usermodel/ratingmodel");
 const multer = require("multer");
 
 router.post("/adminlogin", async (req, res) => {
@@ -23,7 +23,7 @@ router.get("/dashboard", async (req, res) => {
   const blogcount = await Blog.countDocuments({deleted:{$ne:true}});
   const verifiedcount = await Blog.countDocuments({verified:true,deleted:{$ne:true}});
   const pendingcount = await Blog.countDocuments({verified:false,deleted:{$ne:true}});
-  const deletingcount = await Blog.countDocuments({deleted:true,deleted:{$ne:false}});
+  const deletingcount = await Blog.countDocuments({deleted: true});
   const ratingcount = await ratings.countDocuments();
   res.json({ usercount, blogcount,verifiedcount , pendingcount, deletingcount , ratingcount });
   
@@ -35,7 +35,7 @@ router.get("/userslist", async (req, res) => {
 });
 
 router.delete("/deleteuser/:id", async (req, res) => {
-  await User.findOneAndDelete(req.params.id);
+  await User.findByIdAndDelete(req.params.id);
   res.json({ message: "User deleted successfully" });
 });
 
